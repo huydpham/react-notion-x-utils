@@ -1,6 +1,6 @@
 {
   "name": "react-notion-x-utils",
-  "version": "1.0.0",
+  "version": "1.0.5",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/huydpham/react-notion-x-utils/issues"
   },
-  "homepage": "https://github.com/huydpham/react-notion-x-utils#readme"
+  "homepage": "https://github.com/huydpham/react-notion-x-utils#readme",
+  "dependencies": {
+    "memfs": "^4.7.0"
+  }
 }

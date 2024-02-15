@@ -1,7 +1,13 @@
-import { fs } from "memfs";
+const fs = require("memfs");
 
-export async function returnCachedIfExist(pageId, dbDataGetter) {
-  const filePath = `/${pageId}.json`;
+const FS_PREFIX = "/react-notion-x-utils";
+
+async function returnCachedIfExist(pageId, dbDataGetter) {
+  // makedir if not exist
+  if (!fs.existsSync(FS_PREFIX)) {
+    fs.mkdirSync(FS_PREFIX);
+  }
+  const filePath = `${FS_PREFIX}/${pageId}.json`;
 
   try {
     // Check if the file exists in the virtual file system
@@ -25,7 +31,7 @@ export async function returnCachedIfExist(pageId, dbDataGetter) {
   }
 }
 
-export function getExtractionTools(recordMap) {
+function getExtractionTools(recordMap) {
   // Begin
   const dbId = Object.keys(recordMap.collection_query)[0];
   const dbViewId = Object.keys(recordMap.collection_query[dbId])[0];
@@ -57,3 +63,9 @@ export function getExtractionTools(recordMap) {
       block.properties?.[getKeyByName(name)]?.[0]?.[1]?.[0]?.[1]?.start_date,
   };
 }
+
+// export
+module.exports = {
+  returnCachedIfExist,
+  getExtractionTools,
+};
