@@ -2,6 +2,15 @@ const fs = require("memfs");
 
 const FS_PREFIX = "/react-notion-x-utils";
 
+/**
+ * This function checks if a page's data exists in the virtual file system.
+ * If it does, it returns the data. If it doesn't, it fetches the data,
+ * saves it to the virtual file system, and then returns it.
+ *
+ * @param {string} pageId - The ID of the page.
+ * @param {function} dbDataGetter - The function to fetch the page data.
+ * @returns {Promise<object>} The page data.
+ */
 async function returnCachedIfExist(pageId, dbDataGetter) {
   // makedir if not exist
   if (!fs.existsSync(FS_PREFIX)) {
@@ -31,6 +40,12 @@ async function returnCachedIfExist(pageId, dbDataGetter) {
   }
 }
 
+/**
+ * This function returns a set of tools for extracting information from a record map.
+ *
+ * @param {object} recordMap - The record map.
+ * @returns {object} The extraction tools.
+ */
 function getExtractionTools(recordMap) {
   // Begin
   const dbId = Object.keys(recordMap.collection_query)[0];
